@@ -1,0 +1,25 @@
+A megoldáshoz több külső libet is használtam, ezekre később kitérek.
+
+Először az scapy lib segítségéve TCP SYN csomagokat küldtem a szerver megadott portjaira, ezzel megvalósítva a port knocking részét a feladatnak.
+
+Ezek után a socket libet használva megnyitottam egy tcp socketet a serverhez, ezen kommunikálva a feladat következő pár részének megoldásait.
+
+A neptunom küldése után megérkezett a matek feladatok száma és az első feladat.
+
+Erre egy functiont készítettem, aminek a bemenete az egyenlet és a kimenete a megoldás.
+
+A function segítségével megoldottam az első egyenletet, majd egy függvénybe ágyazva a többit is.
+
+Ezek után a hashlib lib segítségével elkészítettem az sha1 hashét a neptunomnak és az utolsó megoldásnak.
+
+A következő feladat a 0000-val kezdődő hash előállítása volt, ezt a brute libbel (és egy kisebb javítással rajta) oldottam meg, úgy hogy brute force módszerrel el kezdtem próbálgatni, ameddig az elvárt kezdetű hash elő nem állt.
+
+A hash elküldése után a megadott címről manuálisan böngészőből letöltöttem a cert és key fájlokat. Ezt azért nem automatizáltam a programban, mert a feladat szövege alapján úgy értelmeztem, hogy a manuális letöltés is jó megoldás.
+
+A program ezután kéri a két cert fájl elérési útvonalát, ha ezt nem adom meg az alapértelmezett downloads mappámban keresi őket.
+
+A két megadott fájl használatával és a httplib2 libbel authentikálom magamat a szerveren (itt ki kellett kapcsolnom az ssl ellenőrzést, mivel a szerver self-signed certtel rendelkezik).
+
+Első alkalommal a szerver a válaszában kérte, hogy módosítsam a user-agentet "CrySyS"-ra, így hozzáadtam a kódban az autentikáció előtt egy custom headert a user-agent számára.
+
+Ezek után már vissza adta a flaget (flag{YouCanHandleNetworking-FIBRPN-d4ed78}) a szerver, ami a flag.txt fileban is megtalálható.
